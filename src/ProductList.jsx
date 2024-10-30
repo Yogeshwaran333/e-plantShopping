@@ -3,7 +3,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import './ProductList.css'
 import CartItem from './CartItem';
 import { addItem } from './CartSlice';
-function ProductList() {
+
+function ProductList({ onViewCartClick }) {
     const dispatch = useDispatch();
     const cartItemsCount = useSelector(state => state.cart.items.reduce((total, item) => total + item.quantity, 0));
     const [showCart, setShowCart] = useState(false); 
@@ -277,7 +278,8 @@ const handlePlantsClick = (e) => {
             </div>
             <div style={styleObjUl}>
                 <div> <a href="#" onClick={(e)=>handlePlantsClick(e)} style={styleA}>Plants</a></div>
-                <div> <a href="#" onClick={(e) => handleCartClick(e)} style={styleA}><h1 className='cart'>
+                <div className="cart-container" onClick={onViewCartClick}> 
+                <a href="#" onClick={(e) => handleCartClick(e)} style={styleA}><h1 className='cart'>
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" id="IconChangeColor" height="68" width="68">
                         <rect width="156" height="156" fill="none"></rect>
                     <circle cx="80" cy="216" r="12"></circle>
